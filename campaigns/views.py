@@ -13,7 +13,6 @@ def main_campaigns(request):
     username =  request.user.first_name if request.user.first_name else request.user.username
     return render(request, 'main_campaigns.html', context={ "username": username})
 
-
 def new_template(request):
     if not request.user.is_authenticated:
         return redirect('/signin')
@@ -45,8 +44,7 @@ def send_campaign_emails(request):
         selected_template_id = request.POST['template_id']
         form = NewEmail(request.POST)
         if form.is_valid():
-            user = request.user
-            send_emails_to_users(request, selected_template_id, user)
+            send_emails_to_users(request, selected_template_id)
             messages.success(request, "Emails sent!" )
             return redirect("/campaigns")
     username =  request.user.first_name if request.user.first_name else request.user.username    

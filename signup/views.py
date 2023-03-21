@@ -14,7 +14,6 @@ def index(request):
                 all_errors += str(msg[0]) + "\n"
             messages.error(request, "Unsuccessful registration. Invalid information.\n" + all_errors)
         if form.is_valid():
-            print("valid")
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful." )

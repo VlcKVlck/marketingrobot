@@ -24,7 +24,7 @@ from django.contrib import messages
 SCOPES = ['https://www.googleapis.com/auth/gmail.compose']
 
 
-def send_emails_to_users(request, selected_template_id, user):
+def send_emails_to_users(request, selected_template_id):
     creds = None
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
@@ -43,7 +43,6 @@ def send_emails_to_users(request, selected_template_id, user):
     print("sending emails to users")
 
     list_of_customers =  list(Customer.objects.all())
-    list_of_customer_emails =  list(Customer.objects.values_list('email', flat=True))
     selected_template = EmailTemplate.objects.get(id=selected_template_id)
     title = EmailTemplate.objects.get(id=selected_template_id).subject
     body = EmailTemplate.objects.get(id=selected_template_id).body
@@ -82,7 +81,7 @@ def send_emails_to_users(request, selected_template_id, user):
             
     messages.success(request, "Emails sent!." )
 
-    update_DB_with_sent_emails(selected_template, user, list_of_valid_customers)
+    update_DB_with_sent_emails(selected_template, request.user, list_of_valid_customers)
         
     return sent_messages
 
