@@ -1,0 +1,48 @@
+{% extends 'main_campaigns.html' %}
+{% load static %}
+
+{% block title %}Send  Emails {%endblock%}
+{% block content %}
+    <div class="container py-5">
+        <h1 class="text-center">Send Campaign Emails</h1>
+        <p class="text-center">Select a template to send an email campaign</p>
+    <div class="container py-5">
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3 mx-auto">
+
+            <div class="mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center  text-white mx-auto overflow-hidden" >
+            <img src="{%static 'images\campaigns\template_site.png'%}" style="height:40rem; align-self: center;">
+            </div>
+            <div class=" mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center" style="width:80%;">
+                <form method="POST" class="text-center" >
+                    {% csrf_token %}
+                    <select class="form-select form-select-lg mb-3"  name="template_id" onchange="showBody()" style="width: 90%;" autofocus="True">
+                        <option disabled="True" selected>--Templates--</option>
+                        {% for template in templates %}
+                            <option value="{{template.id}}" data-body="{{template.body}}">{{ template.name }}</option>
+                        {% endfor %} 
+                    </select>
+                    <p id="template_body" style="display: none;"></p>
+                    <br><br>
+                    <button class="btn btn-info mx-auto" type="submit" style="display: block; align-self: center;">Send</button>
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+    {% endblock %}
+
+    {% block scripts %}
+    <script>
+        function showBody(templates) {
+            const select = document.querySelector('select');
+            let x = document.getElementById("template_body");
+            const template = select.options[select.selectedIndex].dataset;
+            x.innerHTML = template.body;
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } 
+        }
+    </script>
+    {% endblock %}

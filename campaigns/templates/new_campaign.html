@@ -1,0 +1,21 @@
+
+{% extends "main_campaigns.html" %}
+{% load crispy_forms_tags %}    
+
+    
+    {% block title %}Create New template {%endblock%}
+
+    {% block content %} 
+    
+    <div class="container py-5 ">
+        <h1 class="text-center">Create a new tempalte</h1>
+        <p class="text-center">Add the information below .</p>
+    <div class="container py-5">
+        <form method="POST">
+            {% csrf_token %}
+            {{ new_campaign_form|crispy }}                    
+            <button class="btn btn-info" type="submit">Save</button>
+        </form>
+    </div>
+
+    {% endblock %}

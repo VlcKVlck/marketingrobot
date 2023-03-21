@@ -1,0 +1,46 @@
+
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{%static 'icons/favicon.png' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <title>Welcome!</title>
+
+ 
+  </head>
+
+  <body class="text-center">
+    {% include "messages.html" %}
+    <div class="container">
+      <img class="mb-4" src="{%static 'images\main\main_img.png'%}" alt="fast emails" width="20%" height="30%">
+      <h1 class="display-1 text-bold">Your personal email robot</h1>
+       <h5 class="text-gray-soft text-regular"> Email automation made simple.</h5>
+    </div>
+    
+
+    <form method="POST" class="form-signin" style="margin: 35%; margin-top: 5%; ">
+        {% csrf_token %}
+      
+      <h1 class="h3 mb-3 font-weight-normal m-1">Please sign in</h1>
+      <label for="inputUsername m-1" class="sr-only">Username</label>
+      <input type="text" id="inputUsername" name="username" class="form-control m-1" placeholder="Username" required="" autofocus="">
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" name="password" class="form-control m-1" placeholder="Password" required="">
+
+      <button class="btn btn-lg btn-primary btn-block m-1" type="submit">Sign in</button>
+      <p class="text-center">Don't have an accout? <a href="/signup">sign up</a> instead.</p>
+    </form>
+  
+    
+
+<div data-lastpass-root="" style="position: absolute !important; top: 0px !important; left: 0px !important; height: 0px !important; width: 0px !important;"><div data-lastpass-infield="true" style="position: absolute !important; top: 0px !important; left: 0px !important;">
+</div>
+</div>
+</body>
+</html>
